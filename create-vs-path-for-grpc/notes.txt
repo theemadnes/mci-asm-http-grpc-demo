@@ -1,0 +1,20 @@
+# exporting stuff
+export PROJECT=mc-e2m-01
+export GATEWAY_NAMESPACE=asm-ingress
+export CLUSTER_1=autopilot-cluster-1
+export CLUSTER_2=autopilot-cluster-2
+export ASM_REVISION=asm-managed
+export REGION=us-central1
+
+# apply path vs for whereami-http
+kubectl --context $CLUSTER_1 apply -f create-vs-path-for-grpc
+kubectl --context $CLUSTER_2 apply -f create-vs-path-for-grpc
+
+# call gRPC path
+grpcurl frontend.endpoints.mc-e2m-01.cloud.goog:443  whereami.Whereami/GetPayload
+#grpcurl -insecure -authority frontend.endpoints.mc-e2m-01.cloud.goog 34.110.222.38:443 whereami.Whereami/GetPayload
+
+# testing
+curl https://frontend.endpoints.mc-e2m-01.cloud.goog/whereami-http
+curl -v  https://frontend.endpoints.mc-e2m-01.cloud.goog/whereami-http
+kubectl -n whereami-grpc logs -l app=whereami-grpc -c istio-proxy        # dump pod logs, with label name=myLabel (stdout)

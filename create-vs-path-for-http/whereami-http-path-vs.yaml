@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: whereami-http-path-vs
+  namespace: whereami-http
+  #namespace: asm-ingress
+spec:
+  gateways:
+  - asm-ingress/whereami-gateway
+  hosts:
+  - 'frontend.endpoints.mc-e2m-01.cloud.goog'
+  http:
+  - name: "whereami-http-path"
+    match:
+    - uri:
+        prefix: "/whereami-http"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: whereami-http.whereami-http.svc.cluster.local
+        port:
+          number: 80

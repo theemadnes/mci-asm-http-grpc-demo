@@ -4,6 +4,6 @@ commonLabels:
   app: whereami-grpc
 bases:
 - ../base
-patches:
-- cm-flag.yaml
-- service-type.yaml
+patchesStrategicMerge:
+- configmap.yaml
+- service.yaml

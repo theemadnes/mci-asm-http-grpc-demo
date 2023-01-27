@@ -10,7 +10,11 @@ spec:
   hosts:
   - 'frontend.endpoints.mc-e2m-01.cloud.goog'
   http:
-  - route:
+  - name: "base"
+    match:
+    - uri:
+        exact: "/"
+    route:
     - destination:
         host: whereami-http.whereami-http.svc.cluster.local
         port:
