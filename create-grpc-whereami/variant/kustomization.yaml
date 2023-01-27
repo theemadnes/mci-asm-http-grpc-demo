@@ -1,7 +1,7 @@
-nameSuffix: "-http"
-namespace: whereami-http
+#nameSuffix: "-grpc"
+namespace: whereami-grpc
 commonLabels:
-  app: whereami-http
+  app: whereami-grpc
 bases:
 - ../base
 patches:

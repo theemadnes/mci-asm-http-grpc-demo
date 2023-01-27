@@ -1,0 +1,11 @@
+# exporting stuff
+export PROJECT=mc-e2m-01
+export GATEWAY_NAMESPACE=asm-ingress
+export CLUSTER_1=autopilot-cluster-1
+export CLUSTER_2=autopilot-cluster-2
+export ASM_REVISION=asm-managed
+export REGION=us-central1
+
+# create basic gateway, vs, and backendconfig
+kubectl --context $CLUSTER_1 apply -f create-initial-gateway-and-vs-for-http 
+kubectl --context $CLUSTER_2 apply -f create-initial-gateway-and-vs-for-http
