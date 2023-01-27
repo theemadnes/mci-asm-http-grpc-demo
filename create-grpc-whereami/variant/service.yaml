@@ -5,7 +5,7 @@ metadata:
 spec:
   ports:
   - port: 9090
-    appProtocol: gRPC
+    appProtocol: grpc
     #targetPort: 9090
     name: grpc # adding for Istio
   type: ClusterIP
