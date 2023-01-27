@@ -12,6 +12,7 @@ gcloud --project mc-e2m-01 alpha container hub ingress update --config-membershi
 
 # create MCS and MCI
 kubectl --context $CLUSTER_1 apply -f create-mci-mcs
+kubectl --context $CLUSTER_2 apply -f create-mci-mcs
 
 # check on MCS & MCI status
 kubectl --context ${CLUSTER_1} -n asm-ingress describe mcs asm-ingressgateway-multicluster-svc-1

@@ -6,7 +6,7 @@ metadata:
   annotations:
     networking.gke.io/static-ip: "34.110.222.38" # this will vary
     #kubernetes.io/ingress.allow-http: "false" # not recognized
-    networking.gke.io/pre-shared-certs: "gke-mc-ingress-cert"
+    networking.gke.io/pre-shared-certs: "gke-mcg-ingress-cert"
 spec:
   template:
     spec:

@@ -3,6 +3,7 @@ kind: VirtualService
 metadata:
   name: whereami-http-vs
   namespace: whereami-http
+  #namespace: asm-ingress
 spec:
   gateways:
   - asm-ingress/whereami-gateway
@@ -11,6 +12,6 @@ spec:
   http:
   - route:
     - destination:
-        host: whereami-http
+        host: whereami-http.whereami-http.svc.cluster.local
         port:
           number: 80

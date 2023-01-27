@@ -11,12 +11,13 @@ spec:
     spec:
       selector:
         #app: asm-ingressgateway
+        istio: ingressgateway
         app: istio-ingressgateway
       ports:
       - name: https
         protocol: TCP
         port: 443
-        targetPort: 8443
+        #targetPort: 8443
   clusters:
   - link: "us-central1/autopilot-cluster-1"
   - link: "us-central1/autopilot-cluster-2"

@@ -5,7 +5,8 @@ metadata:
   namespace: asm-ingress
 spec:
   selector:
-    asm: ingressgateway
+    app: istio-ingressgateway
+    istio: ingressgateway
   servers:
   - hosts:
     - '*'
