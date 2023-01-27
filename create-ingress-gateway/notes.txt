@@ -1,0 +1,17 @@
+# exporting stuff
+export PROJECT=mc-e2m-01
+export GATEWAY_NAMESPACE=asm-ingress
+export CLUSTER_1=autopilot-cluster-1
+export CLUSTER_2=autopilot-cluster-2
+
+# rename kube contexts for my project
+kubectx autopilot-cluster-1=gke_mc-e2m-01_us-central1_autopilot-cluster-1
+kubectx autopilot-cluster-2=gke_mc-e2m-01_us-central1_autopilot-cluster-2
+
+# create gateway namespace
+kubectl --context=${CLUSTER_1} create namespace $GATEWAY_NAMESPACE
+kubectl --context=${CLUSTER_2} create namespace $GATEWAY_NAMESPACE
+
+# enable injection for gateway namespace
+kubectl --context=${CLUSTER_1} label namespace $GATEWAY_NAMESPACE istio-injection=enabled --overwrite
+kubectl --context=${CLUSTER_2} label namespace $GATEWAY_NAMESPACE istio-injection=enabled --overwrite
