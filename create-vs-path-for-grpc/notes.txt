@@ -10,7 +10,7 @@ export REGION=us-central1
 kubectl --context $CLUSTER_1 apply -f create-vs-path-for-grpc
 kubectl --context $CLUSTER_2 apply -f create-vs-path-for-grpc
 
-# call gRPC path
+# call gRPC at host name (gRPC doesn't support pathing)
 grpcurl frontend.endpoints.mc-e2m-01.cloud.goog:443  whereami.Whereami/GetPayload
 #grpcurl -insecure -authority frontend.endpoints.mc-e2m-01.cloud.goog 34.110.222.38:443 whereami.Whereami/GetPayload
 
