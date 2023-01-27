@@ -1,0 +1,17 @@
+# exporting stuff
+export PROJECT=mc-e2m-01
+export GATEWAY_NAMESPACE=asm-ingress
+export CLUSTER_1=autopilot-cluster-1
+export CLUSTER_2=autopilot-cluster-2
+export ASM_REVISION=asm-managed
+export REGION=us-central1
+
+# create namespace and label for injection
+kubectl --context ${CLUSTER_1} create ns whereami-http
+kubectl --context=${CLUSTER_1} label namespace whereami-http istio-injection- istio.io/rev=$ASM_REVISION --overwrite
+kubectl --context ${CLUSTER_2} create ns whereami-http
+kubectl --context=${CLUSTER_2} label namespace whereami-http istio-injection- istio.io/rev=$ASM_REVISION --overwrite
+
+# create whereami-http service
+kubectl --context ${CLUSTER_1} apply -k create-http-whereami/variant
+kubectl --context ${CLUSTER_2} apply -k create-http-whereami/variant

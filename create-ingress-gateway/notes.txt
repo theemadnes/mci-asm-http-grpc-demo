@@ -3,6 +3,15 @@ export PROJECT=mc-e2m-01
 export GATEWAY_NAMESPACE=asm-ingress
 export CLUSTER_1=autopilot-cluster-1
 export CLUSTER_2=autopilot-cluster-2
+export ASM_REVISION=asm-managed
+export REGION=us-central1
+
+# get asmcli
+# curl https://storage.googleapis.com/csm-artifacts/asm/asmcli_1.15 > asmcli
+# chmod +x asmcli
+
+# get ASM packages
+git clone https://github.com/GoogleCloudPlatform/anthos-service-mesh-packages.git
 
 # rename kube contexts for my project
 kubectx autopilot-cluster-1=gke_mc-e2m-01_us-central1_autopilot-cluster-1
@@ -13,5 +22,9 @@ kubectl --context=${CLUSTER_1} create namespace $GATEWAY_NAMESPACE
 kubectl --context=${CLUSTER_2} create namespace $GATEWAY_NAMESPACE
 
 # enable injection for gateway namespace
-kubectl --context=${CLUSTER_1} label namespace $GATEWAY_NAMESPACE istio-injection=enabled --overwrite
-kubectl --context=${CLUSTER_2} label namespace $GATEWAY_NAMESPACE istio-injection=enabled --overwrite
+kubectl --context=${CLUSTER_1} label namespace $GATEWAY_NAMESPACE istio-injection- istio.io/rev=$ASM_REVISION --overwrite
+kubectl --context=${CLUSTER_2} label namespace $GATEWAY_NAMESPACE istio-injection- istio.io/rev=$ASM_REVISION --overwrite
+
+# apply (from base path) the ingress gateway
+kubectl --context=${CLUSTER_1} -n $GATEWAY_NAMESPACE apply -f create-ingress-gateway
+kubectl --context=${CLUSTER_2} -n $GATEWAY_NAMESPACE apply -f create-ingress-gateway

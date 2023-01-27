@@ -1,0 +1,8 @@
+namespace: whereami-http
+commonLabels:
+  app: whereami-http
+bases:
+- ../base
+patches:
+- cm-flag.yaml
+- service-type.yaml

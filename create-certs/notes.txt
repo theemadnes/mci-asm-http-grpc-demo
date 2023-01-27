@@ -1,0 +1,20 @@
+# exporting stuff
+export PROJECT=mc-e2m-01
+export GATEWAY_NAMESPACE=asm-ingress
+export CLUSTER_1=autopilot-cluster-1
+export CLUSTER_2=autopilot-cluster-2
+export ASM_REVISION=asm-managed
+export REGION=us-central1
+
+# verifying existing cert
+gcloud compute ssl-certificates list --project $PROJECT
+
+# create self-signed cert for ingress gateway 
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
+-subj "/CN=frontend.endpoints.${PROJECT}.cloud.goog/O=Edge2Mesh Inc" \
+-keyout frontend.endpoints.${PROJECT}.cloud.goog.key \
+-out frontend.endpoints.${PROJECT}.cloud.goog.crt
+
+# create cert secrets in gateway namespace 
+kubectl --context=${CLUSTER_1} -n ${GATEWAY_NAMESPACE} create secret tls edge2mesh-credential --key=frontend.endpoints.${PROJECT}.cloud.goog.key --cert=frontend.endpoints.${PROJECT}.cloud.goog.crt
+kubectl --context=${CLUSTER_2} -n ${GATEWAY_NAMESPACE} create secret tls edge2mesh-credential --key=frontend.endpoints.${PROJECT}.cloud.goog.key --cert=frontend.endpoints.${PROJECT}.cloud.goog.crt
