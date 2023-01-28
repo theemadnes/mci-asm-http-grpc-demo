@@ -7,5 +7,5 @@ export ASM_REVISION=asm-managed
 export REGION=us-central1
 
 # create basic gateway, vs, and backendconfig
-kubectl --context $CLUSTER_1 apply -f create-initial-gateway-and-vs-for-http 
-kubectl --context $CLUSTER_2 apply -f create-initial-gateway-and-vs-for-http
+kubectl --context=$CLUSTER_1 apply -f create-gateway-and-backendconfig
+kubectl --context=$CLUSTER_2 apply -f create-gateway-and-backendconfig

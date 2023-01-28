@@ -7,8 +7,8 @@ export ASM_REVISION=asm-managed
 export REGION=us-central1
 
 # apply path vs for whereami-http
-kubectl --context $CLUSTER_1 apply -f create-vs-path-for-grpc
-kubectl --context $CLUSTER_2 apply -f create-vs-path-for-grpc
+kubectl --context=$CLUSTER_1 apply -f create-vs-base-for-grpc
+kubectl --context=$CLUSTER_2 apply -f create-vs-base-for-grpc
 
 # call gRPC at host name (gRPC doesn't support pathing)
 grpcurl frontend.endpoints.mc-e2m-01.cloud.goog:443  whereami.Whereami/GetPayload
@@ -21,5 +21,5 @@ curl -v  https://frontend.endpoints.mc-e2m-01.cloud.goog/whereami-http
 kubectl -n whereami-grpc logs -l app=whereami-grpc -c istio-proxy        # dump pod logs, with label name=myLabel (stdout)
 
 # load testing
-ghz --proto ./create-vs-path-for-grpc/whereami.proto --call whereami.Whereami.GetPayload frontend.endpoints.mc-e2m-01.cloud.goog:443 -c 20 -n 10000
+ghz --proto ./create-vs-base-for-grpc/whereami.proto --call whereami.Whereami.GetPayload frontend.endpoints.mc-e2m-01.cloud.goog:443 -c 20 -n 10000
 hey -c 20 -n 10000 https://frontend.endpoints.mc-e2m-01.cloud.goog/whereami-http
