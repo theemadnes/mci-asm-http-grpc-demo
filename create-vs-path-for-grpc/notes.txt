@@ -19,4 +19,7 @@ grpcurl frontend.endpoints.mc-e2m-01.cloud.goog:443  whereami.Whereami.GetPayloa
 curl https://frontend.endpoints.mc-e2m-01.cloud.goog/whereami-http
 curl -v  https://frontend.endpoints.mc-e2m-01.cloud.goog/whereami-http
 kubectl -n whereami-grpc logs -l app=whereami-grpc -c istio-proxy        # dump pod logs, with label name=myLabel (stdout)
+
+# load testing
 ghz --proto ./create-vs-path-for-grpc/whereami.proto --call whereami.Whereami.GetPayload frontend.endpoints.mc-e2m-01.cloud.goog:443 -c 20 -n 10000
+hey -c 20 -n 10000 https://frontend.endpoints.mc-e2m-01.cloud.goog/whereami-http
