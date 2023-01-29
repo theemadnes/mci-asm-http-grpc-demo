@@ -1,4 +1,4 @@
-apiVersion: networking.gke.io/v1beta1
+apiVersion: networking.gke.io/v1
 kind: MultiClusterService
 metadata:
   name: asm-ingressgateway-multicluster-svc-1
