@@ -17,7 +17,12 @@ spec:
         - host: 'frontend.endpoints.mc-e2m-01.cloud.goog'
           http:
             paths:
+            - path: "/whereami.Whereami/*"
+              backend:
+                serviceName: asm-ingressgateway-multicluster-svc-1
+                servicePort: 443
             - path: "/"
               backend:
                 serviceName: asm-ingressgateway-multicluster-svc-1
                 servicePort: 443
+            
