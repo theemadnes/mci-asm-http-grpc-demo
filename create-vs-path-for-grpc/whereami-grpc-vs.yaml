@@ -15,7 +15,7 @@ spec:
         prefix: "/whereami.Whereami/"
         #regex: '^.*whereami\.Whereami.*$'
     - uri:
-        prefix: "/grpc.reflection.v1alpha.ServerReflection/"
+        prefix: "/grpc.reflection.v1alpha.ServerReflection/" # need this if not using proto file using gRPCurl
     route:
     - destination:
         host: whereami-grpc
