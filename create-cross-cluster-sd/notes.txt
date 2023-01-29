@@ -1,0 +1,11 @@
+# exporting stuff
+export PROJECT=mc-e2m-01
+export GATEWAY_NAMESPACE=asm-ingress
+export CLUSTER_1=autopilot-cluster-1
+export CLUSTER_2=autopilot-cluster-2
+export ASM_REVISION=asm-managed
+export REGION=us-central1
+
+# enable endpoint discovery https://cloud.google.com/service-mesh/docs/unified-install/gke-install-multi-cluster#endpoint-discovery-declarative-api
+kubectl --context=$CLUSTER_1 patch configmap/asm-options -n istio-system --type merge -p '{"data":{"multicluster_mode":"connected"}}'
+kubectl --context=$CLUSTER_2 patch configmap/asm-options -n istio-system --type merge -p '{"data":{"multicluster_mode":"connected"}}'
