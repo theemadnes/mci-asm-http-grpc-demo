@@ -13,6 +13,6 @@ kubectl --context ${CLUSTER_2} create ns whereami-grpc
 kubectl --context=${CLUSTER_2} label namespace whereami-grpc istio-injection- istio.io/rev=$ASM_REVISION --overwrite
 
 # create whereami-grpc service
-kubectl --context ${CLUSTER_1} apply -k create-grpc-whereami/variant
-kubectl --context ${CLUSTER_2} apply -k create-grpc-whereami/variant
+kubectl --context=${CLUSTER_1} apply -k create-grpc-whereami/variant
+kubectl --context=${CLUSTER_2} apply -k create-grpc-whereami/variant
 
